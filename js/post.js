@@ -188,3 +188,23 @@ var $posts = {
 }
 
 $posts.mounted()
+
+document.addEventListener('DOMContentLoaded', function() {
+  var tocBtn = document.getElementById('toc-toggle');
+  var tocModal = document.getElementById('toc-modal');
+  var tocClose = document.getElementById('toc-close');
+  if (tocBtn && tocModal) {
+    tocBtn.addEventListener('click', function() {
+      tocModal.classList.add('show');
+    });
+    tocClose && tocClose.addEventListener('click', function() {
+      tocModal.classList.remove('show');
+    });
+    // 点击弹窗外部关闭
+    window.addEventListener('click', function(e) {
+      if (tocModal.classList.contains('show') && !tocModal.contains(e.target) && e.target !== tocBtn) {
+        tocModal.classList.remove('show');
+      }
+    });
+  }
+});
